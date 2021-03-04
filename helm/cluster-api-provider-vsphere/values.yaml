@@ -8,11 +8,11 @@ project:
 
 image:
   registry: gcr.io
-  name: cluster-api-provider-vsphere/release/manager:latest
+  name: cluster-api-provider-vsphere/release/manager
   tag: 0.7.4
   pullPolicy: IfNotPresent
 
-vSphere:
+config:
   # Username to access the vSphere control center.
   username: ""
   # Password to access the vSphere control center.
