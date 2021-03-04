@@ -34,4 +34,5 @@ Selector labels
 {{- define "labels.selector" -}}
 app.kubernetes.io/name: {{ include "name" . | quote }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
+cluster.x-k8s.io/provider: vsphere
 {{- end -}}

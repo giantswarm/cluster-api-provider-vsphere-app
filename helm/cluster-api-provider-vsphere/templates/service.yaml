@@ -7,7 +7,6 @@ metadata:
     prometheus.io/scrape: "true"
   labels:
     control-plane: {{ include "resource.default.name" . }}-controller-manager
-    cluster.x-k8s.io/provider: vsphere
     giantswarm.io/monitoring: "true"
     {{- include "labels.common" . | nindent 4 }}
   name: {{ include "resource.default.name" . }}-controller-manager-metrics-service

@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   labels:
     control-plane: {{ include "resource.default.name" . }}-controller-manager
-    cluster.x-k8s.io/provider: vsphere
     {{- include "labels.common" . | nindent 4 }}
   name: {{ include "resource.default.name" . }}-controller-manager
   namespace: {{ include "resource.default.namespace" . }}
