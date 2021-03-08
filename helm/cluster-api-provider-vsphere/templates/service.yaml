@@ -8,13 +8,16 @@ metadata:
   labels:
     control-plane: {{ include "resource.default.name" . }}-controller-manager
     giantswarm.io/monitoring: "true"
+    giantswarm.io/monitoring-port: "8443"
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-controller-manager-metrics-service
+  name: {{ include "resource.default.name" . }}
   namespace: {{ include "resource.default.namespace" . }}
 spec:
   ports:
   - name: https
     port: 8443
     targetPort: https
+  - port: 443
+    targetPort: webhook-server
   selector:
     {{- include "labels.selector" . | nindent 6 }}
