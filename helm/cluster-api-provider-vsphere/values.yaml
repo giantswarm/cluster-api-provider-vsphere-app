@@ -7,10 +7,21 @@ project:
   commit: "[[ .SHA ]]"
 
 image:
-  registry: gcr.io
-  name: cluster-api-provider-vsphere/release/manager
-  tag: 0.7.6
-  pullPolicy: IfNotPresent
+  registry: quay.io
+  controller:
+    name: cluster-api-provider-vsphere/release/manager
+    tag: v0.7.6
+    pullPolicy: IfNotPresent
+  proxy:
+    name: giantswarm/kube-rbac-proxy
+    tag: v0.8.0
+    pullPolicy: IfNotPresent
+
+ports:
+  proxy: 8443
+  healthz: 9440
+  metrics: 8080
+  webhook: 9443
 
 config:
   # Username to access the vSphere control center.
