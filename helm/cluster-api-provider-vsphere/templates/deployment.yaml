@@ -19,31 +19,32 @@ spec:
     spec:
       containers:
       - args:
-        - --secure-listen-address=0.0.0.0:8443
-        - --upstream=http://127.0.0.1:8080/
+        - --secure-listen-address=0.0.0.0:{{ .Values.ports.proxy }}
+        - --upstream=http://127.0.0.1:{{ .Values.ports.metrics }}/
         - --logtostderr=true
         - --v=10
-        image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+        image: "{{ .Values.image.registry }}/{{ .Values.image.proxy.name }}:{{ .Values.image.proxy.tag }}"
+        imagePullPolicy: {{ .Values.image.proxy.pullPolicy }}
         name: kube-rbac-proxy
         ports:
-        - containerPort: 8443
+        - containerPort: {{ .Values.ports.proxy }}
           name: https
       - args:
-        - --metrics-addr=127.0.0.1:8080
-        - --webhook-port=9443
+        - --metrics-addr=127.0.0.1:{{ .Values.ports.metrics }}
+        - --webhook-port={{ .Values.ports.webhook }}
         - --enable-leader-election=false
-        image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
-        imagePullPolicy: IfNotPresent
+        image: "{{ .Values.image.registry }}/{{ .Values.image.controller.name }}:{{ .Values.image.controller.tag }}"
+        imagePullPolicy: {{ .Values.image.controller.pullPolicy }}
         livenessProbe:
           httpGet:
             path: /healthz
             port: healthz
         name: manager
         ports:
-        - containerPort: 9443
+        - containerPort: {{ .Values.ports.webhook }}
           name: webhook-server
           protocol: TCP
-        - containerPort: 9440
+        - containerPort: {{ .Values.ports.healthz }}
           name: healthz
           protocol: TCP
         readinessProbe:
@@ -54,16 +55,21 @@ spec:
         - mountPath: /tmp/k8s-webhook-server/serving-certs
           name: cert
           readOnly: true
+        - name: bootstrap-credentials
+          mountPath: /etc/capv
+          readOnly: true
       terminationGracePeriodSeconds: 10
       serviceAccountName: {{ include "resource.default.name" . }}
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/master
       volumes:
-      - name: {{ include "resource.default.name" . }}-manager-bootstrap-credentials
-        mountPath: /etc/capv
-        readOnly: true
+      - name: bootstrap-credentials
+        secret:
+          defaultMode: 420
+          secretName: {{ include "resource.default.name" . }}-manager-bootstrap-credentials
       - name: cert
         secret:
           defaultMode: 420
-          secretName: capv-webhook-service-cert
+          secretName: {{ include "resource.default.name" . }}-cert
+    
