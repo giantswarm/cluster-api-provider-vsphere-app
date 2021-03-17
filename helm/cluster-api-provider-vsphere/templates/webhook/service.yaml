@@ -9,11 +9,14 @@ metadata:
     giantswarm.io/monitoring: "true"
     giantswarm.io/monitoring-port: "{{ .Values.ports.proxy }}"
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}
+  name: {{ include "resource.default.name" . }}-webhook
   namespace: {{ include "resource.default.namespace" . }}
 spec:
   ports:
-  - name: https
+  - name: webhook
+    port: 443
+    targetPort: webhook-server
+  - name: metrics
     port: {{ .Values.ports.proxy }}
     targetPort: https
   selector:

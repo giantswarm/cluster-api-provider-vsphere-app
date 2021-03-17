@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-controller-manager
+  name: {{ include "resource.default.name" . }}-webhook
   namespace: {{ include "resource.default.namespace" . }}
 spec:
   replicas: 1
@@ -31,6 +31,7 @@ spec:
           name: https
       - args:
         - --metrics-addr=127.0.0.1:{{ .Values.ports.metrics }}
+        - --webhook-port={{ .Values.ports.webhook }}
         - --enable-leader-election=false
         image: "{{ .Values.image.registry }}/{{ .Values.image.controller.name }}:{{ .Values.image.controller.tag }}"
         imagePullPolicy: {{ .Values.image.controller.pullPolicy }}
@@ -40,6 +41,9 @@ spec:
             port: healthz
         name: manager
         ports:
+        - containerPort: {{ .Values.ports.webhook }}
+          name: webhook-server
+          protocol: TCP
         - containerPort: {{ .Values.ports.healthz }}
           name: healthz
           protocol: TCP
@@ -48,8 +52,8 @@ spec:
             path: /readyz
             port: healthz
         volumeMounts:
-        - name: bootstrap-credentials
-          mountPath: /etc/capv
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
           readOnly: true
       terminationGracePeriodSeconds: 10
       serviceAccountName: {{ include "resource.default.name" . }}
@@ -57,7 +61,7 @@ spec:
       - effect: NoSchedule
         key: node-role.kubernetes.io/master
       volumes:
-      - name: bootstrap-credentials
+      - name: cert
         secret:
           defaultMode: 420
-          secretName: {{ include "resource.default.name" . }}-manager-bootstrap-credentials
+          secretName: {{ include "resource.default.name" . }}-cert
