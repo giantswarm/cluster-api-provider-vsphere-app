@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/port: "{{ .Values.ports.proxy }}"
+    prometheus.io/scheme: https
+    prometheus.io/scrape: "true"
+  labels:
+    giantswarm.io/monitoring: "true"
+    giantswarm.io/monitoring-port: "{{ .Values.ports.proxy }}"
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ include "resource.default.namespace" . }}
+spec:
+  ports:
+  - name: https
+    port: {{ .Values.ports.proxy }}
+    targetPort: https
+  selector:
+    {{- include "labels.selector" . | nindent 6 }}

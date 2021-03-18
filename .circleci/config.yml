@@ -3,16 +3,16 @@ orbs:
   architect: giantswarm/architect@2.2.0
 
 workflows:
-  package-and-push-chart-on-tag:
+  build:
     jobs:
+      # Ensure that for every commit
+      # there is an app version in the test catalog.
       - architect/push-to-app-catalog:
-          context: "architect"
-          # executor: "app-build-suite" # uncomment this if you want automatic metadata generation
-          name: "package and push {APP-NAME} chart"
-          app_catalog: "giantswarm-playground-catalog"
-          app_catalog_test: "giantswarm-playground-test-catalog"
-          chart: "{APP-NAME}"
-          # Trigger job on git tag.
+          context: architect
+          name: push-to-app-catalog
+          app_catalog: "control-plane-test-catalog"
+          app_catalog_test: "control-plane-test-catalog"
+          chart: "cluster-api-provider-vsphere"
           filters:
             tags:
               only: /^v.*/

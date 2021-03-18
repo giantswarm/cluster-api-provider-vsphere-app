@@ -1,5 +1,3 @@
-# TEMPLATE-APP: This is set as a reasonable default, feel free to change.
-
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
@@ -20,12 +18,10 @@ Common labels
 */}}
 {{- define "labels.common" -}}
 {{ include "labels.selector" . }}
-app.kubernetes.io/name: {{ .Values.name }}
-app.kubernetes.io/instance: {{ .Release.Name | quote }}
 app.giantswarm.io/branch: {{ .Values.project.branch | replace "#" "-" | replace "/" "-" | replace "." "-" | trunc 63 | trimSuffix "-" | quote }}
 app.giantswarm.io/commit: {{ .Values.project.commit | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+control-plane: {{ include "resource.default.name" . }}-controller-manager
 helm.sh/chart: {{ include "chart" . | quote }}
 giantswarm.io/service-type: {{ .Values.serviceType }}
 {{- end -}}
@@ -36,4 +32,6 @@ Selector labels
 {{- define "labels.selector" -}}
 app.kubernetes.io/name: {{ include "name" . | quote }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
+cluster.x-k8s.io/provider: vsphere
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end -}}
