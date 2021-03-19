@@ -27,6 +27,7 @@ webhooks:
     - UPDATE
     resources:
     - vsphereclusters
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -47,6 +48,7 @@ webhooks:
     - UPDATE
     resources:
     - vspheremachines
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -67,6 +69,7 @@ webhooks:
     - UPDATE
     resources:
     - vspheremachinetemplates
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -87,6 +90,7 @@ webhooks:
     - UPDATE
     resources:
     - vspherevms
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -107,6 +111,7 @@ webhooks:
     - UPDATE
     resources:
     - vsphereclusters
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -127,6 +132,7 @@ webhooks:
     - UPDATE
     resources:
     - vspheremachines
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -147,6 +153,7 @@ webhooks:
     - UPDATE
     resources:
     - vspheremachinetemplates
+  reinvocationPolicy: IfNeeded
   sideEffects: None
 - clientConfig:
     caBundle: Cg==
@@ -167,4 +174,5 @@ webhooks:
     - UPDATE
     resources:
     - vspherevms
+  reinvocationPolicy: IfNeeded
   sideEffects: None
