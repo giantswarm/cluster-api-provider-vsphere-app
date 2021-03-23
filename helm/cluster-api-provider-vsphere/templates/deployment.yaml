@@ -32,6 +32,7 @@ spec:
       - args:
         - --metrics-addr=127.0.0.1:{{ .Values.ports.metrics }}
         - --enable-leader-election=false
+        - --watch-filter={{ include "resource.app.version" . }}
         image: "{{ .Values.image.registry }}/{{ .Values.image.controller.name }}:{{ .Values.image.controller.tag }}"
         imagePullPolicy: {{ .Values.image.controller.pullPolicy }}
         livenessProbe:

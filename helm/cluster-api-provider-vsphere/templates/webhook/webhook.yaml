@@ -17,6 +17,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspherecluster.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -37,6 +40,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspheremachine.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -57,6 +63,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspheremachinetemplate.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -77,6 +86,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspherevm.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -97,6 +109,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspherecluster.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -117,6 +132,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspheremachine.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -137,6 +155,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspheremachinetemplate.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
@@ -157,6 +178,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspherevm.infrastructure.x-k8s.io
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: {{ include "resource.app.version" . }}
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
