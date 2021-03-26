@@ -7,10 +7,10 @@ project:
   commit: "[[ .SHA ]]"
 
 image:
-  registry: gcr.io
+  registry: quay.io
   controller:
-    name: cluster-api-provider-vsphere/release/manager
-    tag: v0.7.6
+    name: giantswarm/cluster-api-vsphere-controller
+    tag: 0.7.6-aa2e76e30dc88bb859fda38c799a31bcde5c0e62
     pullPolicy: IfNotPresent
   proxy:
     name: kubebuilder/kube-rbac-proxy
