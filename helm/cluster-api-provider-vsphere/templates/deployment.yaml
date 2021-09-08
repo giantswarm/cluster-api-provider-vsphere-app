@@ -2,46 +2,39 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-controller-manager
-  namespace: {{ include "resource.default.namespace" . }}
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+    control-plane: controller-manager
+  name: capv-controller-manager
+  namespace: capv-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "labels.selector" . | nindent 6 }}
+      cluster.x-k8s.io/provider: infrastructure-vsphere
+      control-plane: controller-manager
   template:
     metadata:
-      annotations:
-        releaseRevision: {{ .Release.Revision | quote }}
       labels:
-        {{- include "labels.common" . | nindent 8 }}
+        cluster.x-k8s.io/provider: infrastructure-vsphere
+        control-plane: controller-manager
     spec:
       containers:
       - args:
-        - --secure-listen-address=0.0.0.0:{{ .Values.ports.proxy }}
-        - --upstream=http://127.0.0.1:{{ .Values.ports.metrics }}/
-        - --logtostderr=true
-        - --v=10
-        image: "{{ .Values.image.registry }}/{{ .Values.image.proxy.name }}:{{ .Values.image.proxy.tag }}"
-        imagePullPolicy: {{ .Values.image.proxy.pullPolicy }}
-        name: kube-rbac-proxy
-        ports:
-        - containerPort: {{ .Values.ports.proxy }}
-          name: https
-      - args:
-        - --metrics-addr=127.0.0.1:{{ .Values.ports.metrics }}
-        - --enable-leader-election=false
-        - --watch-filter={{ include "resource.app.version" . }}
-        image: "{{ .Values.image.registry }}/{{ .Values.image.controller.name }}:{{ .Values.image.controller.tag }}"
-        imagePullPolicy: {{ .Values.image.controller.pullPolicy }}
+        - --enable-leader-election
+        - --logtostderr
+        - --v=4
+        image: gcr.io/cluster-api-provider-vsphere/release/manager:v0.8.1
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /healthz
             port: healthz
         name: manager
         ports:
-        - containerPort: {{ .Values.ports.healthz }}
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
+        - containerPort: 9440
           name: healthz
           protocol: TCP
         readinessProbe:
@@ -49,16 +42,31 @@ spec:
             path: /readyz
             port: healthz
         volumeMounts:
-        - name: bootstrap-credentials
-          mountPath: /etc/capv
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
           readOnly: true
+        - mountPath: /etc/capv
+          name: manager-bootstrap-credentials
+          readOnly: true
+      - args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=10
+        image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
       terminationGracePeriodSeconds: 10
-      serviceAccountName: {{ include "resource.default.name" . }}
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/master
       volumes:
-      - name: bootstrap-credentials
+      - name: cert
         secret:
           defaultMode: 420
-          secretName: {{ include "resource.default.name" . }}-manager-bootstrap-credentials
+          secretName: capv-webhook-service-cert
+      - name: manager-bootstrap-credentials
+        secret:
+          secretName: capv-manager-bootstrap-credentials

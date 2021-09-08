@@ -9,11 +9,11 @@ project:
 image:
   registry: quay.io
   controller:
-    name: giantswarm/cluster-api-vsphere-controller
-    tag: 0.7.6-aa2e76e30dc88bb859fda38c799a31bcde5c0e62
+    name: quay.io/giantswarm/cluster-api-vsphere-controller
+    tag: v0.8.1
     pullPolicy: IfNotPresent
   proxy:
-    name: kubebuilder/kube-rbac-proxy
+    name: giantswarm/kube-rbac-proxy
     tag: v0.8.0
     pullPolicy: IfNotPresent
 
@@ -23,8 +23,12 @@ ports:
   metrics: 8080
   webhook: 9443
 
-config:
-  # Username to access the vSphere control center.
-  username: ""
-  # Password to access the vSphere control center.
-  password: ""
+Installation:
+  V1:
+    Secret:
+      Provider:
+        VSphere:
+          # Username to access the vSphere control center.
+          Username: ""
+          # Password to access the vSphere control center.
+          Password: ""

@@ -1,9 +1,57 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-manager-role
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+  name: capv-leader-election-role
+  namespace: capv-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - configmaps/status
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  labels:
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+  name: capv-manager-role
 rules:
 - apiGroups:
   - ""
@@ -37,18 +85,15 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - secrets
+  - namespaces
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
   - watch
 - apiGroups:
-  - infrastructure.cluster.x-k8s.io
+  - ""
   resources:
-  - haproxyloadbalancers
+  - secrets
   verbs:
   - create
   - delete
@@ -60,7 +105,19 @@ rules:
 - apiGroups:
   - infrastructure.cluster.x-k8s.io
   resources:
-  - haproxyloadbalancers/status
+  - vsphereclusteridentities
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vsphereclusteridentities/status
   verbs:
   - get
   - patch
@@ -85,6 +142,38 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vspheredeploymentzones
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vspheredeploymentzones/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vspherefailuredomains
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - infrastructure.cluster.x-k8s.io
   resources:
@@ -130,8 +219,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-proxy-role
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+  name: capv-proxy-role
 rules:
 - apiGroups:
   - authentication.k8s.io
@@ -147,31 +236,47 @@ rules:
   - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-manager-rolebinding
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+  name: capv-leader-election-rolebinding
+  namespace: capv-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ include "resource.default.name" . }}-manager-role
+  kind: Role
+  name: capv-leader-election-role
 subjects:
 - kind: ServiceAccount
-  name: {{ include "resource.default.name" . }}
-  namespace: {{ include "resource.default.namespace" . }}
+  name: default
+  namespace: capv-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-proxy-rolebinding
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+  name: capv-manager-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "resource.default.name" . }}-proxy-role
+  name: capv-manager-role
 subjects:
 - kind: ServiceAccount
-  name: {{ include "resource.default.name" . }}
-  namespace: {{ include "resource.default.namespace" . }}
+  name: default
+  namespace: capv-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+  name: capv-proxy-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: capv-proxy-role
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: capv-system
