@@ -1,5 +1,5 @@
 name: cluster-api-provider-vsphere
-namespace: kube-system
+namespace: giantswarm
 serviceType: managed
 
 project:
@@ -11,11 +11,9 @@ image:
   controller:
     name: quay.io/giantswarm/cluster-api-vsphere-controller
     tag: v0.8.1
-    pullPolicy: IfNotPresent
   proxy:
     name: giantswarm/kube-rbac-proxy
     tag: v0.8.0
-    pullPolicy: IfNotPresent
 
 ports:
   proxy: 8443

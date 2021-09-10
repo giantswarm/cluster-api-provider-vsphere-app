@@ -2,18 +2,18 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   annotations:
-    cert-manager.io/inject-ca-from: capv-system/capv-serving-cert
+    cert-manager.io/inject-ca-from: {{ include "resource.default.namespace" . }}/{{ include "resource.default.name" . }}-cert
   labels:
     cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: capv-mutating-webhook-configuration
+  name: {{ include "resource.default.name" . }}
 webhooks:
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
     caBundle: Cg==
     service:
-      name: capv-webhook-service
-      namespace: capv-system
+      name: {{ include "resource.default.name" . }}-webhook
+      namespace: {{ include "resource.default.namespace" . }}
       path: /mutate-infrastructure-cluster-x-k8s-io-v1alpha4-vspheredeploymentzone
   failurePolicy: Fail
   matchPolicy: Equivalent
@@ -34,8 +34,8 @@ webhooks:
   clientConfig:
     caBundle: Cg==
     service:
-      name: capv-webhook-service
-      namespace: capv-system
+      name: {{ include "resource.default.name" . }}-webhook
+      namespace: {{ include "resource.default.namespace" . }}
       path: /mutate-infrastructure-cluster-x-k8s-io-v1alpha4-vspherefailuredomain
   failurePolicy: Fail
   matchPolicy: Equivalent
