@@ -2,17 +2,15 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   annotations:
-    cert-manager.io/inject-ca-from: {{ include "resource.default.namespace" . }}/{{ include "resource.default.name" . }}-cert
+    cert-manager.io/inject-ca-from: {{ include "resource.default.namespace" . }}/{{ include "resource.cert.name" . }}
   labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}
+    {{- include "labels.common" . | nindent 4 }}
+  name: zzz-{{ include "resource.default.name" . }}
 webhooks:
-- admissionReviewVersions:
-  - v1beta1
-  clientConfig:
+- clientConfig:
     caBundle: Cg==
     service:
-      name: {{ include "resource.default.name" . }}-webhook
+      name: {{ include "resource.webhook.name" . }}
       namespace: {{ include "resource.default.namespace" . }}
       path: /mutate-infrastructure-cluster-x-k8s-io-v1alpha4-vspheredeploymentzone
   failurePolicy: Fail
@@ -29,12 +27,10 @@ webhooks:
     resources:
     - vspheredeploymentzones
   sideEffects: None
-- admissionReviewVersions:
-  - v1beta1
-  clientConfig:
+- clientConfig:
     caBundle: Cg==
     service:
-      name: {{ include "resource.default.name" . }}-webhook
+      name: {{ include "resource.webhook.name" . }}
       namespace: {{ include "resource.default.namespace" . }}
       path: /mutate-infrastructure-cluster-x-k8s-io-v1alpha4-vspherefailuredomain
   failurePolicy: Fail

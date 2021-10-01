@@ -8,15 +8,10 @@ project:
 
 image:
   registry: quay.io
-  controller:
-    name: giantswarm/cluster-api-vsphere-controller
-    tag: v0.8.1
-  proxy:
-    name: giantswarm/kube-rbac-proxy
-    tag: v0.8.0
+  name: giantswarm/cluster-api-vsphere-controller
+  tag: v0.8.1
 
 ports:
-  proxy: 8443
   healthz: 9440
   metrics: 8080
   webhook: 9443

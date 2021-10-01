@@ -2,8 +2,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}-leader-election-role
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}-leader-election
   namespace: {{ include "resource.default.namespace" . }}
 rules:
 - apiGroups:
@@ -48,10 +48,9 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  creationTimestamp: null
   labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}-manager-role
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}-manager
 rules:
 - apiGroups:
   - ""
@@ -216,36 +215,16 @@ rules:
   - update
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}-proxy-role
-rules:
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
----
-apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}-leader-election-rolebinding
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}-leader-election
   namespace: {{ include "resource.default.namespace" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ include "resource.default.name" . }}-leader-election-role
+  name: {{ include "resource.default.name" . }}-leader-election
 subjects:
 - kind: ServiceAccount
   name: {{ include "resource.default.name" . }}
@@ -255,27 +234,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}-manager-rolebinding
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}-manager
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "resource.default.name" . }}-manager-role
-subjects:
-- kind: ServiceAccount
-  name: {{ include "resource.default.name" . }}
-  namespace: {{ include "resource.default.namespace" . }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  labels:
-    cluster.x-k8s.io/provider: infrastructure-vsphere
-  name: {{ include "resource.default.name" . }}-proxy-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ include "resource.default.name" . }}-proxy-role
+  name: {{ include "resource.default.name" . }}-manager
 subjects:
 - kind: ServiceAccount
   name: {{ include "resource.default.name" . }}

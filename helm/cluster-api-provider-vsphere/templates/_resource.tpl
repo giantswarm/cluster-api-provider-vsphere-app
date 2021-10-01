@@ -10,16 +10,12 @@ room for such suffix.
 {{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "resource.networkPolicy.name" -}}
-{{- include "resource.default.name" . -}}-network-policy
+{{- define "resource.webhook.name" -}}
+{{- include "resource.default.name" . -}}-webhook
 {{- end -}}
 
-{{- define "resource.psp.name" -}}
-{{- include "resource.default.name" . -}}-psp
-{{- end -}}
-
-{{- define "resource.pullSecret.name" -}}
-{{- include "resource.default.name" . -}}-pull-secret
+{{- define "resource.cert.name" -}}
+{{- include "resource.default.name" . -}}-cert
 {{- end -}}
 
 {{- define "resource.default.namespace" -}}
