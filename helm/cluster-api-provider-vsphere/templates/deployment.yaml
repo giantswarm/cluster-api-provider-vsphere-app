@@ -17,9 +17,13 @@ spec:
     spec:
       containers:
       - args:
-        - --enable-leader-election
         - --logtostderr
         - --v=4
+        - --metrics-addr=:{{ .Values.ports.metrics }}
+        - --enable-leader-election
+        - --leader-election-id={{ include "resource.default.name" . }}-leader-election
+        - --webhook-port={{ .Values.ports.webhook }}
+        - --health-addr=:{{ .Values.ports.healthz }}
         image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -28,15 +32,22 @@ spec:
             port: healthz
         name: manager
         ports:
-        - containerPort: {{ .Values.ports.webhook }}
-          name: webhook
-          protocol: TCP
         - containerPort: {{ .Values.ports.healthz }}
           name: healthz
+          protocol: TCP
+        - containerPort: {{ .Values.ports.metrics }}
+          name: metrics
+          protocol: TCP
+        - containerPort: {{ .Values.ports.webhook }}
+          name: webhook
           protocol: TCP
         readinessProbe:
           httpGet:
             path: /readyz
+            port: healthz
+        livenessProbe:
+          httpGet:
+            path: /healthz
             port: healthz
         volumeMounts:
         - mountPath: /tmp/k8s-webhook-server/serving-certs

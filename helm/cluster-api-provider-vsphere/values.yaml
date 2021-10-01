@@ -15,13 +15,3 @@ ports:
   healthz: 9440
   metrics: 8080
   webhook: 9443
-
-Installation:
-  V1:
-    Secret:
-      Provider:
-        VSphere:
-          # Username to access the vSphere control center.
-          Username: ""
-          # Password to access the vSphere control center.
-          Password: ""
