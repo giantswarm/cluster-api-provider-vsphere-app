@@ -7,7 +7,9 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
   name: zzz-{{ include "resource.default.name" . }}
 webhooks:
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}
@@ -27,7 +29,9 @@ webhooks:
     resources:
     - vsphereclustertemplates
   sideEffects: None
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}
@@ -47,7 +51,9 @@ webhooks:
     resources:
     - vspherefailuredomains
   sideEffects: None
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}
@@ -67,7 +73,9 @@ webhooks:
     resources:
     - vspheremachines
   sideEffects: None
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}
@@ -87,7 +95,9 @@ webhooks:
     resources:
     - vspheremachinetemplates
   sideEffects: None
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}

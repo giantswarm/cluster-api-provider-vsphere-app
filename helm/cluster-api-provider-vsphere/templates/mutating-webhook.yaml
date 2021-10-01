@@ -7,7 +7,9 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
   name: zzz-{{ include "resource.default.name" . }}
 webhooks:
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}
@@ -27,7 +29,9 @@ webhooks:
     resources:
     - vspheredeploymentzones
   sideEffects: None
-- clientConfig:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
     caBundle: Cg==
     service:
       name: {{ include "resource.webhook.name" . }}
