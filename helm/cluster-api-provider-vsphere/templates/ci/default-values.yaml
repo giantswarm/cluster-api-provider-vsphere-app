@@ -1,7 +1,0 @@
-Installation:
-  V1:
-    Secret:
-      Provider:
-        VSphere:
-          Username: ""
-          Password: ""
