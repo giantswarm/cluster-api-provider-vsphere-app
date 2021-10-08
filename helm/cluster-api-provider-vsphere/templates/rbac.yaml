@@ -1,9 +1,56 @@
 apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}-leader-election
+  namespace: {{ include "resource.default.namespace" . }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - configmaps/status
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-manager-role
+  name: {{ include "resource.default.name" . }}-manager
 rules:
 - apiGroups:
   - ""
@@ -37,18 +84,15 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - secrets
+  - namespaces
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
   - watch
 - apiGroups:
-  - infrastructure.cluster.x-k8s.io
+  - ""
   resources:
-  - haproxyloadbalancers
+  - secrets
   verbs:
   - create
   - delete
@@ -60,7 +104,19 @@ rules:
 - apiGroups:
   - infrastructure.cluster.x-k8s.io
   resources:
-  - haproxyloadbalancers/status
+  - vsphereclusteridentities
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vsphereclusteridentities/status
   verbs:
   - get
   - patch
@@ -85,6 +141,38 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vspheredeploymentzones
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vspheredeploymentzones/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - infrastructure.cluster.x-k8s.io
+  resources:
+  - vspherefailuredomains
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - infrastructure.cluster.x-k8s.io
   resources:
@@ -127,35 +215,16 @@ rules:
   - update
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: RoleBinding
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-proxy-role
-rules:
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-manager-rolebinding
+  name: {{ include "resource.default.name" . }}-leader-election
+  namespace: {{ include "resource.default.namespace" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ include "resource.default.name" . }}-manager-role
+  kind: Role
+  name: {{ include "resource.default.name" . }}-leader-election
 subjects:
 - kind: ServiceAccount
   name: {{ include "resource.default.name" . }}
@@ -166,11 +235,11 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-proxy-rolebinding
+  name: {{ include "resource.default.name" . }}-manager
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "resource.default.name" . }}-proxy-role
+  name: {{ include "resource.default.name" . }}-manager
 subjects:
 - kind: ServiceAccount
   name: {{ include "resource.default.name" . }}

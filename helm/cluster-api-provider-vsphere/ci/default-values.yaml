@@ -1,8 +1,7 @@
----
 Installation:
   V1:
     Secret:
-      CAPI:
-        VMware:
-          Username: username
-          Password: password
+      Provider:
+        VSphere:
+          Username: ""
+          Password: ""

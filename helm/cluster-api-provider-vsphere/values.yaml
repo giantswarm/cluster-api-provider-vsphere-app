@@ -1,5 +1,5 @@
 name: cluster-api-provider-vsphere
-namespace: kube-system
+namespace: giantswarm
 serviceType: managed
 
 project:
@@ -8,23 +8,10 @@ project:
 
 image:
   registry: quay.io
-  controller:
-    name: giantswarm/cluster-api-vsphere-controller
-    tag: 0.7.6-aa2e76e30dc88bb859fda38c799a31bcde5c0e62
-    pullPolicy: IfNotPresent
-  proxy:
-    name: kubebuilder/kube-rbac-proxy
-    tag: v0.8.0
-    pullPolicy: IfNotPresent
+  name: giantswarm/cluster-api-vsphere-controller
+  tag: v0.8.1
 
 ports:
-  proxy: 8443
   healthz: 9440
   metrics: 8080
   webhook: 9443
-
-config:
-  # Username to access the vSphere control center.
-  username: ""
-  # Password to access the vSphere control center.
-  password: ""
