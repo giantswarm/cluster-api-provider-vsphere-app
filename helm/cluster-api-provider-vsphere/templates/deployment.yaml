@@ -18,10 +18,8 @@ spec:
       containers:
       - args:
         - --logtostderr
-        - --v=4
+        - --v=10
         - --metrics-addr=:{{ .Values.ports.metrics }}
-        - --enable-leader-election
-        - --leader-election-id={{ include "resource.default.name" . }}-leader-election
         - --webhook-port={{ .Values.ports.webhook }}
         - --health-addr=:{{ .Values.ports.healthz }}
         image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
