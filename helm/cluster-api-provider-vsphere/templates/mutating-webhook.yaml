@@ -51,4 +51,3 @@ webhooks:
     resources:
     - vspherefailuredomains
   sideEffects: None
-  
