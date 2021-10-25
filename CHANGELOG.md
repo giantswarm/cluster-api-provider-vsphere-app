@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.1] - 2021-10-25
+
 ### Added
 
 - Add initial helm chart
 
-[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/tree/master
+[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.8.1...HEAD
+[0.8.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/releases/tag/v0.8.1
