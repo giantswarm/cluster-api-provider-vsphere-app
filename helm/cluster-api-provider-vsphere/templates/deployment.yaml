@@ -54,10 +54,22 @@ spec:
         - mountPath: /etc/capv
           name: manager-bootstrap-credentials
           readOnly: true
-      nodeSelector:
-        vsphere-role: manager
+
       serviceAccountName: {{ include "resource.default.name" . }}
       terminationGracePeriodSeconds: 10
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- with .Values.nodeAffinity }}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+                {{- toYaml . | nindent 14 }}
+            weight: 100
+      {{- end }}
       volumes:
       - name: cert
         secret:
