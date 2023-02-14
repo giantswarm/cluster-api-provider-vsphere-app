@@ -15,3 +15,15 @@ ports:
   healthz: 9440
   metrics: 8080
   webhook: 9443
+
+tolerations:
+  - key: node.cloudprovider.kubernetes.io/uninitialized
+    value: "true"
+    effect: NoSchedule
+  - key: "CriticalAddonsOnly"
+    operator: "Exists"
+  - key: node-role.kubernetes.io/control-plane
+    effect: NoSchedule
+nodeAffinity:
+  - key: node-role.kubernetes.io/control-plane
+    operator: "Exists"

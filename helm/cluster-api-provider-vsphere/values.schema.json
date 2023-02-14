@@ -1,0 +1,150 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "namespace": {
+        "type": "string"
+      },
+      "serviceType": {
+        "type": "string"
+      },
+      "project": {
+        "type": "object",
+        "properties": {
+          "branch": {
+            "type": "string"
+          },
+          "commit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "branch",
+          "commit"
+        ]
+      },
+      "image": {
+        "type": "object",
+        "properties": {
+          "registry": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "registry",
+          "name",
+          "tag"
+        ]
+      },
+      "ports": {
+        "type": "object",
+        "properties": {
+          "healthz": {
+            "type": "integer"
+          },
+          "metrics": {
+            "type": "integer"
+          },
+          "webhook": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "healthz",
+          "metrics",
+          "webhook"
+        ]
+      },
+      "tolerations": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value",
+              "effect"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "operator"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "effect"
+            ]
+          }
+        ]
+      },
+      "matchExpressions": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "operator"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "name",
+      "namespace",
+      "serviceType",
+      "project",
+      "image",
+      "ports"
+    ]
+  }
