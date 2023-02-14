@@ -1,0 +1,18 @@
+aggregationRule:
+  clusterRoleSelectors:
+  - matchLabels:
+      capv.infrastucture.cluster.x-k8s.io/aggregate-to-manager: "true"
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.giantswarm.io/branch: '{{ .Values.project.branch }}'
+    app.giantswarm.io/commit: '{{ .Values.project.commit }}'
+    app.kubernetes.io/instance: '{{ .Release.Name }}'
+    app.kubernetes.io/managed-by: '{{ .Release.Service }}'
+    app.kubernetes.io/name: '{{ .Chart.Name }}'
+    app.kubernetes.io/version: '{{ .Chart.AppVersion }}'
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+    helm.sh/chart: '{{ .Chart.Name }}'
+  name: capv-aggregated-manager-role
+rules: []

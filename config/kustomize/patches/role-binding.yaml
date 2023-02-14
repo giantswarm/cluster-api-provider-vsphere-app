@@ -1,0 +1,10 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: capv-leader-election-rolebinding
+  namespace: capv-system
+subjects:
+- kind: ServiceAccount
+  name: capv-controller-manager
+  namespace: '{{ .Release.Namespace }}'
