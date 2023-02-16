@@ -10,10 +10,6 @@ crds:
   install: true
   jobRegistry: quay.io
 
-nodeAffinity:
-  - key: node-role.kubernetes.io/control-plane
-    operator: "Exists"
-
 resources:
   limits:
     cpu: 1000m
