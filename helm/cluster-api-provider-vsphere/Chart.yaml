@@ -1,7 +1,14 @@
 apiVersion: v2
+version: [[ .Version ]]
 appVersion: "v0.8.1"
+name: cluster-api-provider-vsphere
 description: A Helm chart for cluster api provider vsphere
 engine: gotpl
 home: https://github.com/giantswarm/cluster-api-provider-vsphere-app
-name: cluster-api-provider-vsphere
-version: [[ .Version ]]
+sources:
+  - https://github.com/giantswarm/cluster-api-provider-vsphere-app
+annotations:
+  application.giantswarm.io/team: "rocket"
+maintainers:
+  - name: Team Rocket
+    email: team-rocket@giantswarm.io

@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capv-controller-manager
+  namespace: capv-system
+spec:
+  template:
+    spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+      priorityClassName: "{{ .Values.priorityClass }}"
+      serviceAccountName: capv-controller-manager
+      containers:
+        - name: manager
+          image: "{{.Values.image.name}}:{{.Values.image.tag}}"
+          args:
+          - --leader-elect
+          - --logtostderr
+          - --v=6
+          - --feature-gates=NodeAntiAffinity=false,NodeLabeling=false
+          resources:
+            limits:
+              cpu: "{{ .Values.resources.limits.cpu }}"
+              memory: "{{ .Values.resources.limits.memory }}"
+            requests:
+              cpu: "{{ .Values.resources.requests.cpu }}"
+              memory: "{{ .Values.resources.requests.memory }}"
+      volumes:
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: capv-webhook-server-cert

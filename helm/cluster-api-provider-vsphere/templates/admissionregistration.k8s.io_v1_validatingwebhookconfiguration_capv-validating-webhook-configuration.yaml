@@ -2,19 +2,25 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
-    cert-manager.io/inject-ca-from: {{ include "resource.default.namespace" . }}/{{ include "resource.cert.name" . }}
+    cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: zzz-{{ include "resource.default.name" . }}
+    app.giantswarm.io/branch: '{{ .Values.project.branch }}'
+    app.giantswarm.io/commit: '{{ .Values.project.commit }}'
+    app.kubernetes.io/instance: '{{ .Release.Name }}'
+    app.kubernetes.io/managed-by: '{{ .Release.Service }}'
+    app.kubernetes.io/name: '{{ .Chart.Name }}'
+    app.kubernetes.io/version: '{{ .Chart.AppVersion }}'
+    cluster.x-k8s.io/provider: infrastructure-vsphere
+    helm.sh/chart: '{{ .Chart.Name }}'
+  name: capv-validating-webhook-configuration
 webhooks:
 - admissionReviewVersions:
-  - v1
+  - v1beta1
   clientConfig:
-    caBundle: Cg==
     service:
-      name: {{ include "resource.webhook.name" . }}
-      namespace: {{ include "resource.default.namespace" . }}
-      path: /validate-infrastructure-cluster-x-k8s-io-v1alpha4-vsphereclustertemplate
+      name: capv-webhook-service
+      namespace: '{{ .Release.Namespace }}'
+      path: /validate-infrastructure-cluster-x-k8s-io-v1beta1-vsphereclustertemplate
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vsphereclustertemplate.infrastructure.x-k8s.io
@@ -22,7 +28,7 @@ webhooks:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
     apiVersions:
-    - v1alpha4
+    - v1beta1
     operations:
     - CREATE
     - UPDATE
@@ -30,13 +36,12 @@ webhooks:
     - vsphereclustertemplates
   sideEffects: None
 - admissionReviewVersions:
-  - v1
+  - v1beta1
   clientConfig:
-    caBundle: Cg==
     service:
-      name: {{ include "resource.webhook.name" . }}
-      namespace: {{ include "resource.default.namespace" . }}
-      path: /validate-infrastructure-cluster-x-k8s-io-v1alpha4-vspherefailuredomain
+      name: capv-webhook-service
+      namespace: '{{ .Release.Namespace }}'
+      path: /validate-infrastructure-cluster-x-k8s-io-v1beta1-vspherefailuredomain
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspherefailuredomain.infrastructure.cluster.x-k8s.io
@@ -44,7 +49,7 @@ webhooks:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
     apiVersions:
-    - v1alpha4
+    - v1beta1
     operations:
     - CREATE
     - UPDATE
@@ -52,13 +57,12 @@ webhooks:
     - vspherefailuredomains
   sideEffects: None
 - admissionReviewVersions:
-  - v1
+  - v1beta1
   clientConfig:
-    caBundle: Cg==
     service:
-      name: {{ include "resource.webhook.name" . }}
-      namespace: {{ include "resource.default.namespace" . }}
-      path: /validate-infrastructure-cluster-x-k8s-io-v1alpha4-vspheremachine
+      name: capv-webhook-service
+      namespace: '{{ .Release.Namespace }}'
+      path: /validate-infrastructure-cluster-x-k8s-io-v1beta1-vspheremachine
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspheremachine.infrastructure.x-k8s.io
@@ -66,7 +70,7 @@ webhooks:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
     apiVersions:
-    - v1alpha4
+    - v1beta1
     operations:
     - CREATE
     - UPDATE
@@ -74,13 +78,12 @@ webhooks:
     - vspheremachines
   sideEffects: None
 - admissionReviewVersions:
-  - v1
+  - v1beta1
   clientConfig:
-    caBundle: Cg==
     service:
-      name: {{ include "resource.webhook.name" . }}
-      namespace: {{ include "resource.default.namespace" . }}
-      path: /validate-infrastructure-cluster-x-k8s-io-v1alpha4-vspheremachinetemplate
+      name: capv-webhook-service
+      namespace: '{{ .Release.Namespace }}'
+      path: /validate-infrastructure-cluster-x-k8s-io-v1beta1-vspheremachinetemplate
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspheremachinetemplate.infrastructure.x-k8s.io
@@ -88,7 +91,7 @@ webhooks:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
     apiVersions:
-    - v1alpha4
+    - v1beta1
     operations:
     - CREATE
     - UPDATE
@@ -96,13 +99,12 @@ webhooks:
     - vspheremachinetemplates
   sideEffects: None
 - admissionReviewVersions:
-  - v1
+  - v1beta1
   clientConfig:
-    caBundle: Cg==
     service:
-      name: {{ include "resource.webhook.name" . }}
-      namespace: {{ include "resource.default.namespace" . }}
-      path: /validate-infrastructure-cluster-x-k8s-io-v1alpha4-vspherevm
+      name: capv-webhook-service
+      namespace: '{{ .Release.Namespace }}'
+      path: /validate-infrastructure-cluster-x-k8s-io-v1beta1-vspherevm
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: validation.vspherevm.infrastructure.x-k8s.io
@@ -110,7 +112,7 @@ webhooks:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io
     apiVersions:
-    - v1alpha4
+    - v1beta1
     operations:
     - CREATE
     - UPDATE

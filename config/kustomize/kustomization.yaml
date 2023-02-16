@@ -1,0 +1,29 @@
+namespace: "{{ .Release.Namespace }}"
+
+resources:
+  - input/infrastructure-components.yaml
+  - patches/sa.yaml
+
+transformers:
+  - patches/common-labels.yaml
+  - patches/monitoring-annotations.yaml
+
+patchesStrategicMerge:
+  - patches/delete-namespace.yaml
+  - patches/certificate.yaml
+  - patches/webhook-certificate.yaml
+  - patches/delete-issuer.yaml
+  - patches/deployment-resources.yaml
+  - patches/cluster-role-binding.yaml
+  - patches/role-binding.yaml
+  - patches/secret.yaml
+
+patches:
+  - path: patches/crd_cainjection.yaml
+    target:
+      kind: CustomResourceDefinition
+      labelSelector: cluster.x-k8s.io/provider=infrastructure-vsphere
+  - path: patches/crd_webhook.yaml
+    target:
+      kind: CustomResourceDefinition
+      labelSelector: cluster.x-k8s.io/provider=infrastructure-vsphere

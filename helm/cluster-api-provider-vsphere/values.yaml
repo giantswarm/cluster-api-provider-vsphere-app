@@ -1,29 +1,21 @@
-name: cluster-api-provider-vsphere
-namespace: giantswarm
-serviceType: managed
+image:
+  name: quay.io/giantswarm/cluster-api-vsphere-controller
+  tag: v1.5.1
 
 project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA ]]"
+  branch: ""
+  commit: ""
 
-image:
-  registry: quay.io
-  name: giantswarm/cluster-api-vsphere-controller
-  tag: v0.8.1
+crds:
+  install: true
+  jobRegistry: quay.io
 
-ports:
-  healthz: 9440
-  metrics: 8080
-  webhook: 9443
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2048Mi
+  requests:
+    cpu: 200m
+    memory: 512Mi
 
-tolerations:
-  - key: node.cloudprovider.kubernetes.io/uninitialized
-    value: "true"
-    effect: NoSchedule
-  - key: "CriticalAddonsOnly"
-    operator: "Exists"
-  - key: node-role.kubernetes.io/control-plane
-    effect: NoSchedule
-nodeAffinity:
-  - key: node-role.kubernetes.io/control-plane
-    operator: "Exists"
+priorityClass: ""

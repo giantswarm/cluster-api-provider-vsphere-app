@@ -1,150 +1,100 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-      "name": {
-        "type": "string"
-      },
-      "namespace": {
-        "type": "string"
-      },
-      "serviceType": {
-        "type": "string"
-      },
-      "project": {
-        "type": "object",
-        "properties": {
-          "branch": {
-            "type": "string"
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "crds": {
+      "type": "object",
+      "properties": {
+          "install": {
+              "type": "boolean"
           },
-          "commit": {
-            "type": "string"
+          "jobRegistry": {
+              "type": "string"
           }
-        },
-        "required": [
-          "branch",
-          "commit"
-        ]
-      },
-      "image": {
-        "type": "object",
-        "properties": {
-          "registry": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "tag": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "registry",
-          "name",
-          "tag"
-        ]
-      },
-      "ports": {
-        "type": "object",
-        "properties": {
-          "healthz": {
-            "type": "integer"
-          },
-          "metrics": {
-            "type": "integer"
-          },
-          "webhook": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "healthz",
-          "metrics",
-          "webhook"
-        ]
-      },
-      "tolerations": {
-        "type": "array",
-        "items": [
-          {
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              },
-              "effect": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "key",
-              "value",
-              "effect"
-            ]
-          },
-          {
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "operator": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "key",
-              "operator"
-            ]
-          },
-          {
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "effect": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "key",
-              "effect"
-            ]
-          }
-        ]
-      },
-      "matchExpressions": {
-        "type": "array",
-        "items": [
-          {
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "operator": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "key",
-              "operator"
-            ]
-          }
-        ]
       }
     },
-    "required": [
-      "name",
-      "namespace",
-      "serviceType",
-      "project",
-      "image",
-      "ports"
-    ]
-  }
+    "project": {
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "tag"
+      ]
+    },
+    "ports": {
+      "type": "object",
+      "properties": {
+        "healthz": {
+          "type": "integer"
+        },
+        "metrics": {
+          "type": "integer"
+        },
+        "webhook": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "healthz",
+        "metrics",
+        "webhook"
+      ]
+    },
+    "resources": {
+      "type": "object",
+      "properties": {
+          "limits": {
+              "type": "object",
+              "properties": {
+                  "cpu": {
+                      "type": "string"
+                  },
+                  "memory": {
+                      "type": "string"
+                  }
+              }
+          },
+          "requests": {
+              "type": "object",
+              "properties": {
+                  "cpu": {
+                      "type": "string"
+                  },
+                  "memory": {
+                      "type": "string"
+                  }
+              }
+          }
+      }
+    },
+    "priorityClass": {
+      "type": "string",
+      "description": "priorityClass to apply to the deployment, set it to a high priority.",
+      "examples": [
+          "giantswarm-critical"
+      ]
+    }
+  },
+  "required": [
+    "project",
+    "image"
+  ]
+}

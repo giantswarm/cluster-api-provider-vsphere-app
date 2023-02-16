@@ -40,3 +40,20 @@ Provider labels
 {{- define "labels.provider" -}}
 cluster.x-k8s.io/provider: infrastructure-vsphere
 {{- end -}}
+
+{{/*
+CRD installation labels
+*/}}
+{{- define "crdInstall" -}}
+{{- printf "%s-%s" ( include "name" . ) "crd-install" | replace "+" "_" | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "crdInstallAnnotations" -}}
+"helm.sh/hook": "pre-install,pre-upgrade"
+"helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+{{- end -}}
+
+{{/* Create a label which can be used to select any orphaned crd-install hook resources */}}
+{{- define "crdInstallSelector" -}}
+{{- printf "%s" "crd-install-hook" -}}
+{{- end -}}
