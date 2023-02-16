@@ -16,3 +16,17 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+
+      - architect/push-to-app-collection:
+          name: vsphere-app-collection
+          context: "architect"
+          app_name: "cluster-api-provider-vsphere"
+          app_collection_repo: "vsphere-app-collection"
+          requires:
+            - push-to-control-plane-app-catalog
+          # Trigger job on git tag.
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
