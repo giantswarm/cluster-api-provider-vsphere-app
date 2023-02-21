@@ -1,0 +1,20 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: VSphereClusterIdentity
+metadata:
+  labels:
+    app.giantswarm.io/branch: '{{ .Values.project.branch }}'
+    app.giantswarm.io/commit: '{{ .Values.project.commit }}'
+    app.kubernetes.io/instance: '{{ .Release.Name }}'
+    app.kubernetes.io/managed-by: '{{ .Release.Service }}'
+    app.kubernetes.io/name: '{{ .Chart.Name }}'
+    app.kubernetes.io/version: '{{ .Chart.AppVersion }}'
+    helm.sh/chart: '{{ .Chart.Name }}'
+  name: capv-cluster-identity
+  namespace: '{{ .Release.Namespace }}'
+spec:
+  allowedNamespaces:
+    selector:
+      matchExpressions:
+      - key: giantswarm.io/ignored-by-capv
+        operator: DoesNotExist
+  secretName: capv-credentials

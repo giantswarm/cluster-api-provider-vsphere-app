@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: capv-credentials
+  namespace: capv-system
+data:
+  username: '{{ (((((.Values.Installation).V1).Secret).Provider).VSphere).Username | quote }}'
+  password: '{{ (((((.Values.Installation).V1).Secret).Provider).VSphere).Password | quote }}'
+type: Opaque
+---
+# cluster scoped CR that will be referenced from VSphereCluster.spec.identityRef
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: VSphereClusterIdentity
+metadata:
+  name: capv-cluster-identity
+spec:
+  #AllowedNamespaces is used to identify which namespaces are allowed to use this account
+  # (those that don't have ignored-by-capv label on them)
+  allowedNamespaces:
+    selector:
+      matchExpressions:
+      - key: giantswarm.io/ignored-by-capv
+        operator: DoesNotExist
+
+  # SecretName references a Secret inside the controller namespace with the credentials to use
+  secretName: "capv-credentials"
