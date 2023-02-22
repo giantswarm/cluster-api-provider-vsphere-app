@@ -29,6 +29,15 @@ rules:
   - delete
   - get
   - patch
+  - list
+  - watch
+- apiGroups:
+  - "infrastructure.cluster.x-k8s.io"
+  resources:
+  - vsphereclusteridentities
+  verbs:
+  - create
+  - get
 - apiGroups:
   - policy
   resources:

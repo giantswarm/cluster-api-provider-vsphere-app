@@ -11,6 +11,9 @@ find config/kustomize/tmp/ -regex ".*apiextensions.k8s.io_v1_customresourcedefin
 	mv -v config/kustomize/tmp/${filename} helm/${1}/files/${filename/apiextensions.k8s.io_v1_customresourcedefinition_/}
 done
 
+# CR instance
+mv -v config/kustomize/tmp/infrastructure.cluster.x-k8s.io_v1beta1_vsphereclusteridentity_capv-cluster-identity.yaml helm/${1}/files/capv-cluster-identity.yaml
+
 find helm/${1}/files/ -regex ".*infrastructure.cluster.x-k8s.io.yaml" | while read f; do
 	mv -v ${f} ${f/infrastructure.cluster.x-k8s.io./}
 done

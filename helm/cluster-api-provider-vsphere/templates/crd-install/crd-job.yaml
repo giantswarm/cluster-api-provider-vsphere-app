@@ -36,6 +36,8 @@ spec:
           set -o errexit ; set -o xtrace ; set -o nounset
           # piping stderr to stdout means kubectl's errors are surfaced
           # in the pod's logs.
+          kubectl apply -f /data/vsphereclusteridentities.yaml 2>&1
+          kubectl wait --for condition=established --timeout=60s crd/vsphereclusteridentities.infrastructure.cluster.x-k8s.io 2>&1
           kubectl apply -f /data/ 2>&1
         securityContext:
           readOnlyRootFilesystem: true
