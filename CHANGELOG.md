@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2023-03-14
+
 ### Changelog
 
 - Rebase on upstream (`1.5.1`) version (crds & all the manifests).
@@ -19,5 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add initial helm chart
 
-[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.8.1...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/releases/tag/v0.8.1
