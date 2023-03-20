@@ -7,6 +7,7 @@ resources:
 transformers:
   - patches/common-labels.yaml
   - patches/monitoring-annotations.yaml
+  - patches/clusterctl-labels.yaml
 
 patchesStrategicMerge:
   - patches/delete-namespace.yaml
