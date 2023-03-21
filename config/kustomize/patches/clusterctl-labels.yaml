@@ -1,0 +1,12 @@
+---
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: clusterctl-labels
+labels:
+  clusterctl.cluster.x-k8s.io: ""
+  clusterctl.cluster.x-k8s.io/move: ""
+fieldSpecs:
+  - path: metadata/labels
+    create: true
+    kind: CustomResourceDefinition

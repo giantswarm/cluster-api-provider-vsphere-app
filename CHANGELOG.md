@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.1] - 2023-03-20
 
+### Added
+
+- Add labels to CRDs for clusterctl move.
+
 ## [0.9.0] - 2023-03-14
 
 ### Changelog
