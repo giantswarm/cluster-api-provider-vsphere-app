@@ -10,6 +10,9 @@ crds:
   install: true
   jobRegistry: quay.io
 
+ciliumNetworkPolicy:
+  enabled: false
+
 resources:
   limits:
     cpu: 1000m
