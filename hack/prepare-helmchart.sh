@@ -11,8 +11,16 @@ find config/kustomize/tmp/ -regex ".*apiextensions.k8s.io_v1_customresourcedefin
 	mv -v config/kustomize/tmp/${filename} helm/${1}/files/${filename/apiextensions.k8s.io_v1_customresourcedefinition_/}
 done
 
-find helm/${1}/files/ -regex ".*infrastructure.cluster.x-k8s.io.yaml" | while read f; do
+find "helm/${1}/files/" -regex ".*infrastructure.cluster.x-k8s.io.yaml" | while read -r f; do
 	mv -v ${f} ${f/infrastructure.cluster.x-k8s.io./}
+done
+
+# wrap ciliumnetworkpolicy files with if statements
+find config/kustomize/tmp/ -regex '.*_ciliumnetworkpolicy_.*.yaml' | while read -r f; do
+	content=$(cat "${f}")
+	echo '{{- if .Values.ciliumNetworkPolicy.enabled }}' > "${f}"
+        echo "${content}" >> "${f}"
+	echo '{{- end }}' >> "${f}"
 done
 
 # move everything from current tmp workdir over to helm

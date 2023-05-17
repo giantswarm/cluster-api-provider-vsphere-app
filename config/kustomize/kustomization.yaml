@@ -3,6 +3,8 @@ namespace: "{{ .Release.Namespace }}"
 resources:
   - input/infrastructure-components.yaml
   - patches/sa.yaml
+  - extras/ciliumnetworkpolicy-capv-controller-manager.yaml
+  - extras/networkpolicy-capv-controller-manager.yaml
 
 transformers:
   - patches/common-labels.yaml
