@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Remove rogue `creationTimestamp: "null"`.
+
 ## [0.9.3] - 2023-05-17
+
+:warning: This release is broken. Please use 0.9.4 instead.
 
 ### Added
 
