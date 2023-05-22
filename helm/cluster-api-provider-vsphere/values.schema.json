@@ -2,17 +2,6 @@
   "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
-    "crds": {
-      "type": "object",
-      "properties": {
-          "install": {
-              "type": "boolean"
-          },
-          "jobRegistry": {
-              "type": "string"
-          }
-      }
-    },
     "ciliumNetworkPolicy": {
         "type": "object",
         "properties": {
@@ -20,6 +9,28 @@
                 "type": "boolean"
             }
         }
+    },
+    "crdInstall": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "kubectl": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "string"
+            },
+            "registry": {
+              "type": "string"
+            },
+            "tag": {
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "project": {
       "type": "object",

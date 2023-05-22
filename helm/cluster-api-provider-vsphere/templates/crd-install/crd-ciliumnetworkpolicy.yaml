@@ -1,4 +1,4 @@
-{{- if .Values.crds.install }}
+{{- if .Values.crdInstall.enable }}
 {{- if .Values.ciliumNetworkPolicy.enabled }}
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy

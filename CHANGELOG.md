@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+**Info on breaking changes:** This release makes incompatible changes to the values schema.
+
+<details>
+<summary>How to migrate from 0.9.4</summary>
+
+To migrate from `0.9.4`, the `crds` entry in `values.yaml` has been replaced with `crdInstall`. If these were
+overridden when the chart was installed then the values must be updated to reflect the new structure. If these
+were left as default then no action is required.
+</details>
+
+### Changed
+
+- :boom: **Breaking:** Update `kubectl` image to `1.25.10` and align CRD install values with other providers.
+
 ## [0.9.4] - 2023-05-19
 
 ### Fixed
