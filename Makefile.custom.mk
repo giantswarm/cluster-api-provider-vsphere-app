@@ -31,7 +31,7 @@ delete-generated-helm-charts: # clean workspace and delete manifests
 
 .PHONY: release-manifests
 release-manifests:
-	# move files from workdir over to helm directury structure
+	# move files from workdir over to helm directory structure
 	./hack/prepare-helmchart.sh ${APPLICATION_NAME}
 
 $(KUSTOMIZE): ## Download kustomize locally if necessary.
