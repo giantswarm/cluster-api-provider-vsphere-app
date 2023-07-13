@@ -110,6 +110,30 @@
       "examples": [
           "giantswarm-critical"
       ]
+    },
+    "serviceMonitor": {
+      "type": "object",
+      "properties": {
+        "install": {
+          "type": "boolean",
+          "description": "Whether the ServiceMonitor CR should be rendered.",
+          "default": "true"
+        },
+        "interval": {
+            "type": "string",
+            "default": "60s",
+            "description": "Scrape interval for Prometheus.",
+            "examples": ["30s", "2m"],
+            "pattern": "^[0-9]+[smhd]$"
+        },
+        "scrapeTimeout": {
+          "type": "string",
+          "default": "45s",
+          "description": "Scrape timeout for Prometheus.",
+          "examples": ["30s", "2m"],
+          "pattern": "^[0-9]+[smhd]$"
+        }
+      }
     }
   },
   "required": [

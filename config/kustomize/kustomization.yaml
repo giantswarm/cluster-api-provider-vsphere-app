@@ -1,4 +1,6 @@
-namespace: "{{ .Release.Namespace }}"
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: '{{ .Release.Namespace }}'
 
 resources:
   - input/infrastructure-components.yaml
@@ -8,7 +10,6 @@ resources:
 
 transformers:
   - patches/common-labels.yaml
-  - patches/monitoring-annotations.yaml
   - patches/clusterctl-labels.yaml
 
 patchesStrategicMerge:
