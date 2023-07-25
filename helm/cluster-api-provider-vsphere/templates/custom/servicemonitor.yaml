@@ -17,7 +17,7 @@ spec:
   endpoints:
     - interval: {{ .Values.serviceMonitor.interval }}
       path: /metrics
-      port: http
+      targetPort: 8080
       scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
   selector:
     matchLabels:
