@@ -1,0 +1,18 @@
+name: check generated yamls
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  check:
+    if: !contains(github.event.pull_request.labels.*.name, 'skip-ci')
+    runs-on: ubuntu-latest
+    steps:
+    - name: generate manifests
+      run: make all
+    - name: check no change
+      run: git diff --quiet --exit-code && [ -z "$(git status --porcelain)" ]
