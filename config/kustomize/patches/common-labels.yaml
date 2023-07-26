@@ -11,6 +11,7 @@ labels:
   helm.sh/chart: "{{ .Chart.Name }}"
   app.kubernetes.io/name: "{{ .Chart.Name }}"
   app.kubernetes.io/instance: "{{ .Release.Name }}"
+  foo: bar
 fieldSpecs:
   - path: metadata/labels
     create: true
