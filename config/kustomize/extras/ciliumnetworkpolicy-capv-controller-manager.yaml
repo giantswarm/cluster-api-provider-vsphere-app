@@ -13,3 +13,7 @@ spec:
   egress:
     - toEntities:
         - kube-apiserver
+  ingress:  # for webhooks
+    - fromEntities:
+      - cluster  # Even though it's a kube-apiserver pod running in host network it doesn't work without "cluster"
+      - kube-apiserver
