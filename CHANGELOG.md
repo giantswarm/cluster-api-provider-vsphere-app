@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Make PSPs optional since they are deprecated since k8s 1.25 (still enabled by default).
+- Add use of runtime/default seccomp profile.
+- Fix issues reported by kyverno policies. 
+
 ## [0.10.1] - 2023-07-28
 
 ### Added
