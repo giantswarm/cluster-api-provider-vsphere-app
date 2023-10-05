@@ -11,7 +11,7 @@ OS ?= $(shell go env GOOS 2>/dev/null || echo linux)
 ARCH ?= $(shell go env GOARCH 2>/dev/null || echo amd64)
 KUSTOMIZE := ./bin/kustomize
 KUSTOMIZE_VERSION ?= v4.5.7
-yq = ./bin/yq
+YQ = ./bin/yq
 YQ_VERSION := 4.31.2
 
 .PHONY: all
@@ -28,7 +28,7 @@ apply-kustomize-patches: $(KUSTOMIZE) ## apply giantswarm specific patches
 
 .PHONY: apply-custom-patches
 apply-custom-patches: $(YQ) ## apply giantswarm specific patches that are not possible via kustomize
-	./hack/custom-patches.sh ${APPLICATION_NAME} "./bin/yq"
+	./hack/custom-patches.sh
 
 #.PHONY: delete-generated-helm-charts
 delete-generated-helm-charts: # clean workspace and delete manifests
@@ -47,7 +47,7 @@ $(KUSTOMIZE): ## Download kustomize locally if necessary.
 	chmod +x $@
 	@echo "kustomize downloaded"
 
-download-yq: ## Download yq locally if necessary.
+$(YQ): ## Download yq locally if necessary.
 	@echo "====> yq"
 	curl -sfL https://github.com/mikefarah/yq/releases/download/v$(YQ_VERSION)/yq_$(OS)_$(ARCH) > ./bin/yq
 	chmod +x ./bin/yq
