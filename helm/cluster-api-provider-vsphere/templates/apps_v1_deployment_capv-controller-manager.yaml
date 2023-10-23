@@ -61,7 +61,7 @@ spec:
               name: cert
               readOnly: true
           securityContext:
-              {{- with .Values.securityContext }}
+              {{- with .Values.containerSecurityContext }}
               	{{- . | toYaml | nindent 12 }}
               {{- end }}
       priorityClassName: '{{ .Values.priorityClass }}'
