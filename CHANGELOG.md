@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.3] - 2023-10-24
+
 ### Changed
 
 - helm chart values `psps.install -> !global.podSecurityStandards.enforced`
@@ -87,7 +89,8 @@ were left as default then no action is required.
 
 - Add initial helm chart
 
-[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.10.2...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.10.3...HEAD
+[0.10.3]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.10.2...v0.10.3
 [0.10.2]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.10.1...v0.10.2
 [0.10.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.9.4...v0.10.0
