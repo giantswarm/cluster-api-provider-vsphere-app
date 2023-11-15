@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Toleration also for old `node-role.kubernetes.io/master` label. Backward compatibility + we hit this.
+
 ### Changed
 
 - helm chart values `psps.install -> !global.podSecurityStandards.enforced`
