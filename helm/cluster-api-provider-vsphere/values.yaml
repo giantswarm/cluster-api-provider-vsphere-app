@@ -1,5 +1,5 @@
 image:
-  name: quay.io/giantswarm/cluster-api-vsphere-controller
+  name: gsoci.azurecr.io/giantswarm/cluster-api-vsphere-controller
   tag: v1.5.1
 
 project:
@@ -10,7 +10,7 @@ crdInstall:
   enable: true
   kubectl:
     image: "giantswarm/kubectl"
-    registry: quay.io
+    registry: gsoci.azurecr.io
     tag: 1.25.10
 
 ciliumNetworkPolicy:
