@@ -28,7 +28,6 @@ spec:
       containers:
         - args:
             - --leader-elect
-            - --logtostderr
             - --v=6
             - --feature-gates=NodeAntiAffinity=false,NodeLabeling=false
           image: '{{.Values.image.name}}:{{.Values.image.tag}}'

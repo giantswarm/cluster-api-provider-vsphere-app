@@ -21,7 +21,6 @@ spec:
           image: "{{.Values.image.name}}:{{.Values.image.tag}}"
           args:
           - --leader-elect
-          - --logtostderr
           - --v=6
           - --feature-gates=NodeAntiAffinity=false,NodeLabeling=false
           resources:
