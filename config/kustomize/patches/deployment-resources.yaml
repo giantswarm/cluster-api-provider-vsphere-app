@@ -22,7 +22,7 @@ spec:
           args:
           - --leader-elect
           - --v=6
-          - --feature-gates=NodeAntiAffinity=false,NodeLabeling=false
+          - --feature-gates=NodeAntiAffinity=false
           resources:
             limits:
               cpu: "{{ .Values.resources.limits.cpu }}"

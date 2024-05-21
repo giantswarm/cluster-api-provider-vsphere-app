@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Pull images from Azure CR.
+- Bump CAPV from `1.5.1` to `1.8.9`.
 
 ### Added
 
