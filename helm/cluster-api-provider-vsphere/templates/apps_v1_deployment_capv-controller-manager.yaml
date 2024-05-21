@@ -56,15 +56,19 @@ spec:
             requests:
               cpu: '{{ .Values.resources.requests.cpu }}'
               memory: '{{ .Values.resources.requests.memory }}'
-          volumeMounts:
-            - mountPath: /tmp/k8s-webhook-server/serving-certs
-              name: cert
-              readOnly: true
           securityContext:
               {{- with .Values.containerSecurityContext }}
               	{{- . | toYaml | nindent 12 }}
               {{- end }}
+          volumeMounts:
+            - mountPath: /tmp/k8s-webhook-server/serving-certs
+              name: cert
+              readOnly: true
       priorityClassName: '{{ .Values.priorityClass }}'
+      securityContext:
+          {{- with .Values.podSecurityContext }}
+            {{- . | toYaml | nindent 8 }}
+          {{- end }}
       serviceAccountName: capv-controller-manager
       terminationGracePeriodSeconds: 10
       tolerations:
@@ -79,7 +83,3 @@ spec:
           secret:
             defaultMode: 420
             secretName: capv-webhook-server-cert
-      securityContext:
-          {{- with .Values.podSecurityContext }}
-            {{- . | toYaml | nindent 8 }}
-          {{- end }}

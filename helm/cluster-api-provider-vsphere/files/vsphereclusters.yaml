@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.7.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -57,10 +57,12 @@ spec:
       jsonPath: .metadata.creationTimestamp
       name: Age
       type: date
+    deprecated: true
     name: v1alpha3
     schema:
       openAPIV3Schema:
-        description: VSphereCluster is the Schema for the vsphereclusters API
+        description: "VSphereCluster is the Schema for the vsphereclusters API \n
+          Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -137,9 +139,9 @@ spec:
                           may be found. This may used in the event that: 1. It is
                           not desirable to use the K8s API to watch changes to secrets
                           2. The cloud controller manager is not running in a K8s
-                          environment,    such as DC/OS. For example, the container
-                          storage interface (CSI) is    container orcehstrator (CO)
-                          agnostic, and should support non-K8s COs. Defaults to /etc/cloud/credentials.'
+                          environment, such as DC/OS. For example, the container storage
+                          interface (CSI) is container orcehstrator (CO) agnostic,
+                          and should support non-K8s COs. Defaults to /etc/cloud/credentials.'
                         type: string
                       serviceAccount:
                         description: ServiceAccount is the Kubernetes service account
@@ -344,6 +346,7 @@ spec:
                     description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
                     type: string
                 type: object
+                x-kubernetes-map-type: atomic
               server:
                 description: Server is the address of the vSphere endpoint.
                 type: string
@@ -446,10 +449,12 @@ spec:
       jsonPath: .metadata.creationTimestamp
       name: Age
       type: date
+    deprecated: true
     name: v1alpha4
     schema:
       openAPIV3Schema:
-        description: VSphereCluster is the Schema for the vsphereclusters API
+        description: "VSphereCluster is the Schema for the vsphereclusters API \n
+          Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -666,6 +671,55 @@ spec:
                 - host
                 - port
                 type: object
+              failureDomainSelector:
+                description: FailureDomainSelector is the label selector to use for
+                  failure domain selection for the control plane nodes of the cluster.
+                  If not set (`nil`), selecting failure domains will be disabled.
+                  An empty value (`{}`) selects all existing failure domains. A valid
+                  selector will select all failure domains which match the selector.
+                properties:
+                  matchExpressions:
+                    description: matchExpressions is a list of label selector requirements.
+                      The requirements are ANDed.
+                    items:
+                      description: A label selector requirement is a selector that
+                        contains values, a key, and an operator that relates the key
+                        and values.
+                      properties:
+                        key:
+                          description: key is the label key that the selector applies
+                            to.
+                          type: string
+                        operator:
+                          description: operator represents a key's relationship to
+                            a set of values. Valid operators are In, NotIn, Exists
+                            and DoesNotExist.
+                          type: string
+                        values:
+                          description: values is an array of string values. If the
+                            operator is In or NotIn, the values array must be non-empty.
+                            If the operator is Exists or DoesNotExist, the values
+                            array must be empty. This array is replaced during a strategic
+                            merge patch.
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - key
+                      - operator
+                      type: object
+                    type: array
+                  matchLabels:
+                    additionalProperties:
+                      type: string
+                    description: matchLabels is a map of {key,value} pairs. A single
+                      {key,value} in the matchLabels map is equivalent to an element
+                      of matchExpressions, whose key field is "key", the operator
+                      is "In", and the values array contains only "value". The requirements
+                      are ANDed.
+                    type: object
+                type: object
+                x-kubernetes-map-type: atomic
               identityRef:
                 description: IdentityRef is a reference to either a Secret or VSphereClusterIdentity
                   that contains the identity to use when reconciling the cluster.
@@ -773,9 +827,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

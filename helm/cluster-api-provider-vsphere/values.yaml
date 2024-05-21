@@ -1,6 +1,6 @@
 image:
   name: gsoci.azurecr.io/giantswarm/cluster-api-vsphere-controller
-  tag: v1.5.1
+  tag: v1.8.9
 
 project:
   branch: ""

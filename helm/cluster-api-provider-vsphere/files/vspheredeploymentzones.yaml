@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.7.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -39,11 +39,12 @@ spec:
     singular: vspheredeploymentzone
   scope: Cluster
   versions:
-  - name: v1alpha3
+  - deprecated: true
+    name: v1alpha3
     schema:
       openAPIV3Schema:
-        description: VSphereDeploymentZone is the Schema for the vspheredeploymentzones
-          API
+        description: "VSphereDeploymentZone is the Schema for the vspheredeploymentzones
+          API \n Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -143,11 +144,12 @@ spec:
     storage: false
     subresources:
       status: {}
-  - name: v1alpha4
+  - deprecated: true
+    name: v1alpha4
     schema:
       openAPIV3Schema:
-        description: VSphereDeploymentZone is the Schema for the vspheredeploymentzones
-          API
+        description: "VSphereDeploymentZone is the Schema for the vspheredeploymentzones
+          API \n Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -352,9 +354,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

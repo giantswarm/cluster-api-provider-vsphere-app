@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.7.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -39,11 +39,12 @@ spec:
     singular: vspherefailuredomain
   scope: Cluster
   versions:
-  - name: v1alpha3
+  - deprecated: true
+    name: v1alpha3
     schema:
       openAPIV3Schema:
-        description: VSphereFailureDomain is the Schema for the vspherefailuredomains
-          API
+        description: "VSphereFailureDomain is the Schema for the vspherefailuredomains
+          API \n Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -160,11 +161,12 @@ spec:
         type: object
     served: true
     storage: false
-  - name: v1alpha4
+  - deprecated: true
+    name: v1alpha4
     schema:
       openAPIV3Schema:
-        description: VSphereFailureDomain is the Schema for the vspherefailuredomains
-          API
+        description: "VSphereFailureDomain is the Schema for the vspherefailuredomains
+          API \n Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -306,8 +308,9 @@ spec:
                 description: Region defines the name and type of a region
                 properties:
                   autoConfigure:
-                    description: AutoConfigure tags the Type which is specified in
-                      the Topology
+                    description: "AutoConfigure tags the Type which is specified in
+                      the Topology \n Deprecated: This field is going to be removed
+                      in a future release."
                     type: boolean
                   name:
                     description: Name is the name of the tag that represents this
@@ -370,8 +373,9 @@ spec:
                 description: Zone defines the name and type of a zone
                 properties:
                   autoConfigure:
-                    description: AutoConfigure tags the Type which is specified in
-                      the Topology
+                    description: "AutoConfigure tags the Type which is specified in
+                      the Topology \n Deprecated: This field is going to be removed
+                      in a future release."
                     type: boolean
                   name:
                     description: Name is the name of the tag that represents this
@@ -401,9 +405,3 @@ spec:
         type: object
     served: true
     storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

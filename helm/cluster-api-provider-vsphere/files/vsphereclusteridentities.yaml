@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.7.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -38,11 +38,12 @@ spec:
     singular: vsphereclusteridentity
   scope: Cluster
   versions:
-  - name: v1alpha3
+  - deprecated: true
+    name: v1alpha3
     schema:
       openAPIV3Schema:
-        description: VSphereClusterIdentity defines the account to be used for reconciling
-          clusters
+        description: "VSphereClusterIdentity defines the account to be used for reconciling
+          clusters \n Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -108,6 +109,7 @@ spec:
                           "value". The requirements are ANDed.
                         type: object
                     type: object
+                    x-kubernetes-map-type: atomic
                 type: object
               secretName:
                 description: SecretName references a Secret inside the controller
@@ -169,11 +171,12 @@ spec:
     storage: false
     subresources:
       status: {}
-  - name: v1alpha4
+  - deprecated: true
+    name: v1alpha4
     schema:
       openAPIV3Schema:
-        description: VSphereClusterIdentity defines the account to be used for reconciling
-          clusters
+        description: "VSphereClusterIdentity defines the account to be used for reconciling
+          clusters \n Deprecated: This type will be removed in one of the next releases."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -239,6 +242,7 @@ spec:
                           "value". The requirements are ANDed.
                         type: object
                     type: object
+                    x-kubernetes-map-type: atomic
                 type: object
               secretName:
                 description: SecretName references a Secret inside the controller
@@ -370,6 +374,7 @@ spec:
                           "value". The requirements are ANDed.
                         type: object
                     type: object
+                    x-kubernetes-map-type: atomic
                 type: object
               secretName:
                 description: SecretName references a Secret inside the controller
@@ -432,9 +437,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
