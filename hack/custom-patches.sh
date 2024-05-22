@@ -7,6 +7,10 @@ set -o pipefail
 YQ="./bin/yq"
 
 f="config/kustomize/tmp/apps_v1_deployment_capv-controller-manager.yaml"
+
+${YQ} e '.spec.template.spec.securityContext={} | .spec.template.spec.containers[].securityContext={}' ${f} > ${f}.tmp
+mv ${f}.tmp ${f}
+
 ${YQ} e '.spec.template.spec.securityContext.remove-this-key="'"
 {{- with .Values.podSecurityContext }}
   {{- . | toYaml | nindent 8 }}

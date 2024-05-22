@@ -14,7 +14,7 @@ pushd "${TMPDIR}"
 
 git clone --depth=1 --branch "${TAG}" "https://github.com/${UPSTREAM_ORG}/${REPO_NAME}.git"
 pushd "${REPO_NAME}"
-make release-manifests
+make release-manifests-all
 
 # remove cluster-api-provider-vsphere from the stack
 popd
