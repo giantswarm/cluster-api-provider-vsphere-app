@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -433,7 +433,7 @@ spec:
                 type: boolean
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -831,7 +831,7 @@ spec:
                 type: boolean
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -860,7 +860,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VSphereMachine is the Schema for the vspheremachines API
+        description: VSphereMachine is the Schema for the vspheremachines API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -875,7 +875,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: VSphereMachineSpec defines the desired state of VSphereMachine
+            description: VSphereMachineSpec defines the desired state of VSphereMachine.
             properties:
               additionalDisksGiB:
                 description: AdditionalDisksGiB holds the sizes of additional disks
@@ -1226,7 +1226,7 @@ spec:
                 description: PciDevices is the list of pci devices used by the virtual
                   machine.
                 items:
-                  description: PCIDeviceSpec defines virtual machine's PCI configuration
+                  description: PCIDeviceSpec defines virtual machine's PCI configuration.
                   properties:
                     deviceId:
                       description: DeviceID is the device ID of a virtual machine's
@@ -1302,7 +1302,7 @@ spec:
             - template
             type: object
           status:
-            description: VSphereMachineStatus defines the observed state of VSphereMachine
+            description: VSphereMachineStatus defines the observed state of VSphereMachine.
             properties:
               addresses:
                 description: Addresses contains the VSphere instance associated addresses.

@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -62,10 +62,9 @@ spec:
             description: VSphereVMSpec defines the desired state of VSphereVM.
             properties:
               biosUUID:
-                description: BiosUUID is the the VM's BIOS UUID that is assigned at
-                  runtime after the VM has been created. This field is required at
-                  runtime for other controllers that read this CRD as unstructured
-                  data.
+                description: BiosUUID is the VM's BIOS UUID that is assigned at runtime
+                  after the VM has been created. This field is required at runtime
+                  for other controllers that read this CRD as unstructured data.
                 type: string
               bootstrapRef:
                 description: BootstrapRef is a reference to a bootstrap provider-specific
@@ -449,7 +448,7 @@ spec:
                 type: string
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -476,10 +475,9 @@ spec:
             description: VSphereVMSpec defines the desired state of VSphereVM.
             properties:
               biosUUID:
-                description: BiosUUID is the the VM's BIOS UUID that is assigned at
-                  runtime after the VM has been created. This field is required at
-                  runtime for other controllers that read this CRD as unstructured
-                  data.
+                description: BiosUUID is the VM's BIOS UUID that is assigned at runtime
+                  after the VM has been created. This field is required at runtime
+                  for other controllers that read this CRD as unstructured data.
                 type: string
               bootstrapRef:
                 description: BootstrapRef is a reference to a bootstrap provider-specific
@@ -863,14 +861,14 @@ spec:
                 type: string
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
   - name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VSphereVM is the Schema for the vspherevms API
+        description: VSphereVM is the Schema for the vspherevms API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -896,10 +894,9 @@ spec:
                   type: integer
                 type: array
               biosUUID:
-                description: BiosUUID is the the VM's BIOS UUID that is assigned at
-                  runtime after the VM has been created. This field is required at
-                  runtime for other controllers that read this CRD as unstructured
-                  data.
+                description: BiosUUID is the VM's BIOS UUID that is assigned at runtime
+                  after the VM has been created. This field is required at runtime
+                  for other controllers that read this CRD as unstructured data.
                 type: string
               bootstrapRef:
                 description: BootstrapRef is a reference to a bootstrap provider-specific
@@ -1275,7 +1272,7 @@ spec:
                 description: PciDevices is the list of pci devices used by the virtual
                   machine.
                 items:
-                  description: PCIDeviceSpec defines virtual machine's PCI configuration
+                  description: PCIDeviceSpec defines virtual machine's PCI configuration.
                   properties:
                     deviceId:
                       description: DeviceID is the device ID of a virtual machine's
@@ -1347,7 +1344,7 @@ spec:
             - template
             type: object
           status:
-            description: VSphereVMStatus defines the observed state of VSphereVM
+            description: VSphereVMStatus defines the observed state of VSphereVM.
             properties:
               addresses:
                 description: Addresses is a list of the VM's IP addresses. This field
@@ -1486,7 +1483,7 @@ spec:
                   not be set or modified by users.
                 type: string
               vmRef:
-                description: VMRef is the the VM's Managed Object Reference on vSphere.
+                description: VMRef is the VM's Managed Object Reference on vSphere.
                   It can be used by consumers to programatically get this VM representation
                   on vSphere in case of the need to retrieve informations. This field
                   is set once the machine is created and should not be changed
