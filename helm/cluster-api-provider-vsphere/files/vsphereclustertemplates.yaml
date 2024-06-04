@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -116,13 +116,13 @@ spec:
             - template
             type: object
         type: object
-    served: true
+    served: false
     storage: false
   - name: v1beta1
     schema:
       openAPIV3Schema:
         description: VSphereClusterTemplate is the Schema for the vsphereclustertemplates
-          API
+          API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -137,12 +137,14 @@ spec:
           metadata:
             type: object
           spec:
-            description: VSphereClusterTemplateSpec defines the desired state of VSphereClusterTemplate
+            description: VSphereClusterTemplateSpec defines the desired state of VSphereClusterTemplate.
             properties:
               template:
+                description: VSphereClusterTemplateResource describes the data for
+                  creating a VSphereCluster from a template.
                 properties:
                   spec:
-                    description: VSphereClusterSpec defines the desired state of VSphereCluster
+                    description: VSphereClusterSpec defines the desired state of VSphereCluster.
                     properties:
                       clusterModules:
                         description: ClusterModules hosts information regarding the

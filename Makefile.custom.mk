@@ -5,7 +5,7 @@ SHELL := /bin/bash
 APPLICATION_NAME="cluster-api-provider-vsphere"
 
 UPSTREAM_ORG="kubernetes-sigs"
-TAG_TO_SYNC="v1.8.9"
+TAG_TO_SYNC="v1.9.3"
 
 OS ?= $(shell go env GOOS 2>/dev/null || echo linux)
 ARCH ?= $(shell go env GOARCH 2>/dev/null || echo amd64)

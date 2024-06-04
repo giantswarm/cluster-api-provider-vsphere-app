@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: '{{ .Release.Namespace }}/capv-serving-cert'
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   labels:
     app.kubernetes.io/instance: '{{ .Release.Name }}'
     app.kubernetes.io/managed-by: '{{ .Release.Service }}'
@@ -77,11 +77,12 @@ spec:
           metadata:
             type: object
           spec:
-            description: VSphereClusterSpec defines the desired state of VSphereCluster
+            description: VSphereClusterSpec defines the desired state of VSphereCluster.
             properties:
               cloudProviderConfiguration:
-                description: 'CloudProviderConfiguration holds the cluster-wide configuration
-                  for the DEPRECATED: will be removed in v1alpha4 vSphere cloud provider.'
+                description: "CloudProviderConfiguration holds the cluster-wide configuration
+                  for the vSphere cloud provider. \n Deprecated: will be removed in
+                  v1alpha4."
                 properties:
                   disk:
                     description: Disk is the vSphere cloud provider's disk configuration.
@@ -302,16 +303,16 @@ spec:
                 - name
                 type: object
               insecure:
-                description: 'Insecure is a flag that controls whether or not to validate
-                  the vSphere server''s certificate. DEPRECATED: will be removed in
-                  v1alpha4'
+                description: "Insecure is a flag that controls whether to validate
+                  the vSphere server's certificate. \n Deprecated: will be removed
+                  in v1alpha4."
                 type: boolean
               loadBalancerRef:
-                description: 'LoadBalancerRef may be used to enable a control plane
+                description: "LoadBalancerRef may be used to enable a control plane
                   load balancer for this cluster. When a LoadBalancerRef is provided,
                   the VSphereCluster.Status.Ready field will not be true until the
                   referenced resource is Status.Ready and has a non-empty Status.Address
-                  value. DEPRECATED: will be removed in v1alpha4'
+                  value. \n Deprecated: will be removed in v1alpha4."
                 properties:
                   apiVersion:
                     description: API version of the referent.
@@ -357,7 +358,7 @@ spec:
                 type: string
             type: object
           status:
-            description: VSphereClusterStatus defines the observed state of VSphereClusterSpec
+            description: VSphereClusterStatus defines the observed state of VSphereClusterSpec.
             properties:
               conditions:
                 description: Conditions defines current service state of the VSphereCluster.
@@ -427,7 +428,7 @@ spec:
                 type: boolean
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -584,7 +585,7 @@ spec:
                 type: boolean
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -609,7 +610,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VSphereCluster is the Schema for the vsphereclusters API
+        description: VSphereCluster is the Schema for the vsphereclusters API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -624,7 +625,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: VSphereClusterSpec defines the desired state of VSphereCluster
+            description: VSphereClusterSpec defines the desired state of VSphereCluster.
             properties:
               clusterModules:
                 description: ClusterModules hosts information regarding the anti-affinity
@@ -748,7 +749,7 @@ spec:
                 type: string
             type: object
           status:
-            description: VSphereClusterStatus defines the observed state of VSphereClusterSpec
+            description: VSphereClusterStatus defines the observed state of VSphereClusterSpec.
             properties:
               conditions:
                 description: Conditions defines current service state of the VSphereCluster.
