@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Set `--enable-keep-alive=false` to fix the session expiration issue. See https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/issues/2781
+
 ## [0.12.0] - 2024-06-04
 
 ### Changed
