@@ -37,7 +37,7 @@ workflows:
           app_name: "cluster-api-cleaner-vsphere"
           app_collection_repo: "vsphere-addons-app-collection"
           requires:
-            - push-to-app-catalog
+            - push-to-control-plane-app-catalog
           filters:
             branches:
               ignore: /.*/
