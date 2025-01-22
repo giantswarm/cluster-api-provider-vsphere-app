@@ -1,14 +1,22 @@
 apiVersion: v2
-version: [[ .Version ]]
-appVersion: "v0.8.1"
+version: 0.0.1-dev
+appVersion: 0.0.1-dev
 name: cluster-api-provider-vsphere
 description: A Helm chart for cluster api provider vsphere
 engine: gotpl
 home: https://github.com/giantswarm/cluster-api-provider-vsphere-app
+icon: https://s.giantswarm.io/app-icons/vsphere/1/dark.svg
 sources:
   - https://github.com/giantswarm/cluster-api-provider-vsphere-app
 annotations:
   application.giantswarm.io/team: "rocket"
+  config.giantswarm.io/version: 1.x.x
+  ui.giantswarm.io/logo: https://s.giantswarm.io/app-icons/vsphere/1/dark.svg
+restrictions:
+  clusterSingleton: true
+  fixedNamespace: kube-system
+  gpuInstances: false
+  compatibleProviders: [vsphere]
 maintainers:
   - name: Team Rocket
     email: team-rocket@giantswarm.io
