@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2025-03-03
+
 ### Changed
 
 - Bump CAPV from `1.9.3` to `1.10.4`.
@@ -116,7 +118,8 @@ were left as default then no action is required.
 
 - Add initial helm chart
 
-[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.12.1...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.12.1...v0.13.0
 [0.12.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.12.0...v0.12.1
 [0.12.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.10.3...v0.11.0
