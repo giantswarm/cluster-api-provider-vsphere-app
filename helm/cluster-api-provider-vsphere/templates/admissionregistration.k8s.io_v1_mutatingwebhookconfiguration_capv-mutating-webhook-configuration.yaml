@@ -86,7 +86,7 @@ webhooks:
       path: /mutate-infrastructure-cluster-x-k8s-io-v1beta1-vspherevm
   failurePolicy: Fail
   matchPolicy: Equivalent
-  name: default.vspherevm.infrastructure.x-k8s.io
+  name: default.vspherevm.infrastructure.cluster.x-k8s.io
   rules:
   - apiGroups:
     - infrastructure.cluster.x-k8s.io

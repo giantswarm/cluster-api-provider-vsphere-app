@@ -6,7 +6,7 @@ REPO_NAME="cluster-api-provider-vsphere"
 
 cd "$(dirname "${0}")"
 UPSTREAM_ORG="${1}"
-TAG="${2:-v1.5.1}"
+TAG="${2:-v1.12.1}"
 
 # create a temporary directory and checkout CAPV there
 TMPDIR=$(mktemp -d)
