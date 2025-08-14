@@ -28,7 +28,7 @@ A Helm chart for cluster api provider vsphere
 | crdInstall.enable | bool | `true` |  |
 | crdInstall.kubectl.image | string | `"giantswarm/kubectl"` |  |
 | crdInstall.kubectl.registry | string | `"gsoci.azurecr.io"` |  |
-| crdInstall.kubectl.tag | string | `"1.31.11"` |  |
+| crdInstall.kubectl.tag | string | `"1.31.4"` |  |
 | global.podSecurityStandards.enforced | bool | `false` |  |
 | image.name | string | `"gsoci.azurecr.io/giantswarm/cluster-api-vsphere-controller"` |  |
 | image.tag | string | `"v1.12.1"` |  |

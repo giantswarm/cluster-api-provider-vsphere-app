@@ -9,9 +9,9 @@ project:
 crdInstall:
   enable: true
   kubectl:
-    image: "giantswarm/kubectl"
+    image: giantswarm/kubectl
     registry: gsoci.azurecr.io
-    tag: 1.31.11
+    tag: 1.31.4
 
 ciliumNetworkPolicy:
   enabled: false
