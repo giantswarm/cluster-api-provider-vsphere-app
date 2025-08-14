@@ -1,6 +1,6 @@
 # cluster-api-provider-vsphere
 
-![Version: 0.14.0](https://img.shields.io/badge/Version-0.14.0-informational?style=flat-square) ![AppVersion: v1.12.1](https://img.shields.io/badge/AppVersion-v1.12.1-informational?style=flat-square)
+![Version: 0.14.1](https://img.shields.io/badge/Version-0.14.1-informational?style=flat-square) ![AppVersion: v1.12.1](https://img.shields.io/badge/AppVersion-v1.12.1-informational?style=flat-square)
 
 A Helm chart for cluster api provider vsphere
 
