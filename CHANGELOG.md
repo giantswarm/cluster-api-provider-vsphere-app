@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Chart: Remove deprecated flag `--enable-keep-alive`.
+- Chart: Downgrade `kubectl` to an existing image.
 
 ## [0.14.0] - 2025-08-13
 
