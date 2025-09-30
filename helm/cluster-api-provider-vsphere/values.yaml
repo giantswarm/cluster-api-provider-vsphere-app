@@ -1,6 +1,6 @@
 image:
   name: gsoci.azurecr.io/giantswarm/cluster-api-vsphere-controller
-  tag: v1.12.1
+  tag: v1.13.1
 
 project:
   branch: ""
@@ -9,9 +9,9 @@ project:
 crdInstall:
   enable: true
   kubectl:
-    image: giantswarm/kubectl
+    image: giantswarm/docker-kubectl
     registry: gsoci.azurecr.io
-    tag: 1.31.4
+    tag: 1.33.4
 
 ciliumNetworkPolicy:
   enabled: false
