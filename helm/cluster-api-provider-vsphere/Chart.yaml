@@ -1,6 +1,6 @@
 apiVersion: v2
 version: [[ .Version ]]
-appVersion: v1.12.1
+appVersion: v1.13.1
 name: cluster-api-provider-vsphere
 description: A Helm chart for cluster api provider vsphere
 engine: gotpl

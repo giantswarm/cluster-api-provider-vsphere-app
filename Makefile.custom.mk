@@ -5,7 +5,7 @@ SHELL := /bin/bash
 APPLICATION_NAME="cluster-api-provider-vsphere"
 
 UPSTREAM_ORG="kubernetes-sigs"
-TAG_TO_SYNC="v1.12.1"
+TAG_TO_SYNC="v1.13.1"
 
 OS ?= $(shell go env GOOS 2>/dev/null || echo linux)
 ARCH ?= $(shell go env GOARCH 2>/dev/null || echo amd64)
@@ -24,6 +24,9 @@ fetch-upstream-manifest: ## fetch upstream manifest from
 
 .PHONY: apply-kustomize-patches
 apply-kustomize-patches: $(KUSTOMIZE) ## apply giantswarm specific patches
+	# remove braces from CRDs before applying kustomization, which definitely will add and require them.
+	sed -i.bak -e "s/{{ //g" -e "s/ }}//g" config/kustomize/input/infrastructure-components.yaml
+	rm -f config/kustomize/input/infrastructure-components.yaml.bak
 	$(KUSTOMIZE) build config/kustomize -o config/kustomize/tmp
 
 .PHONY: apply-custom-patches
