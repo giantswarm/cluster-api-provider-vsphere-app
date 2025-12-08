@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2025-12-08
+
 ### Changed
 
 - Temporarily disable pushing to CAPA addons collection.
@@ -151,7 +153,8 @@ were left as default then no action is required.
 
 - Add initial helm chart
 
-[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.14.1...v1.0.0
 [0.14.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.14.0...v0.14.1
