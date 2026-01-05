@@ -2,9 +2,6 @@ image:
   name: gsoci.azurecr.io/giantswarm/cluster-api-vsphere-controller
   tag: v1.14.0
 
-project:
-  branch: ""
-  commit: ""
 
 crdInstall:
   enable: true
