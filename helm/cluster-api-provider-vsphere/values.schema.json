@@ -32,17 +32,6 @@
         }
       }
     },
-    "project": {
-      "type": "object",
-      "properties": {
-        "branch": {
-          "type": "string"
-        },
-        "commit": {
-          "type": "string"
-        }
-      }
-    },
     "global": {
       "type": "object",
       "properties": {
@@ -150,7 +139,6 @@
     }
   },
   "required": [
-    "project",
     "image"
   ]
 }
