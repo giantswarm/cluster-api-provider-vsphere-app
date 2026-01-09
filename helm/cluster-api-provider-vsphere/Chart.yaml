@@ -4,7 +4,7 @@ version: 2.0.2-dev
 appVersion: v1.13.1
 description: A Helm chart for cluster api provider vsphere
 home: https://github.com/giantswarm/cluster-api-provider-vsphere-app
-icon: https://s.giantswarm.io/app-icons/giantswarm/1/dark.svg
+icon: https://s.giantswarm.io/app-icons/vsphere/2/icon-dark.png
 sources:
   - https://github.com/giantswarm/cluster-api-provider-vsphere-app
 annotations:
