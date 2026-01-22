@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Remove deprecated labels from all components.
+
 ## [2.1.0] - 2026-01-22
 
 ### Changed
