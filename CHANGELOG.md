@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Migrate to App Build Suite (ABS).
+- Re-enable pushing to CAPA addons collection.
 
 ## [2.0.1] - 2025-12-08
 
