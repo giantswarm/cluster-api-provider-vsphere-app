@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.3] - 2026-06-15
+
 ### Changed
 
 - Update vSphere app icon to the light variant (`https://s.giantswarm.io/app-icons/vsphere/2/icon-light.png`).
@@ -176,7 +178,8 @@ were left as default then no action is required.
 
 - Add initial helm chart
 
-[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.1.2...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.1.3...HEAD
+[2.1.3]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v2.0.1...v2.1.0
