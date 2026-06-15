@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update vSphere app icon to the light variant (`https://s.giantswarm.io/app-icons/vsphere/2/icon-light.png`).
+
 ## [2.1.2] - 2026-03-04
 
 ### Changed
