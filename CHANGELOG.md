@@ -207,6 +207,3 @@ were left as default then no action is required.
 [0.9.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/giantswarm/cluster-api-provider-vsphere-app/releases/tag/v0.8.1
-=======
-...
->>>>>>> d6c6630 (Remove PSP values and changelog)
