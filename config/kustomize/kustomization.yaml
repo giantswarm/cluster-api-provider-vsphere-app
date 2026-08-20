@@ -15,6 +15,7 @@ transformers:
 patchesStrategicMerge:
   - patches/delete-namespace.yaml
   - patches/delete-bootstrap-credentials-secret.yaml
+  - patches/delete-serviceaccount-capv-manager.yaml
   - patches/certificate.yaml
   - patches/webhook-certificate.yaml
   - patches/delete-issuer.yaml

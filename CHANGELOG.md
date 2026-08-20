@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade `cluster-api-provider-vsphere` to v1.15.3.
+- Correct `appVersion`, which still read v1.13.1 while the chart shipped v1.14.0.
+
 ### Removed
 
 - Removed `PodSecurityPolicy`.
