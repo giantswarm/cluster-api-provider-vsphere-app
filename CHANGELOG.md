@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update architect to v10.8.0 (giantswarm/cluster-api-provider-vsphere-app#161)
 - Update architect to v10.11.1 (giantswarm/cluster-api-provider-vsphere-app#162)
 - Update architect to v10.12.0 (giantswarm/cluster-api-provider-vsphere-app#164)
+- Update architect to v10.12.1 (giantswarm/cluster-api-provider-vsphere-app#165)
 
 ## [3.0.0] - 2026-08-26
 
